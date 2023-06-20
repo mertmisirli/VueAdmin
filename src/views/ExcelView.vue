@@ -12,12 +12,12 @@
         <div class="mt-3 pb-3 ">
           <label for="input-token"><span class="pi pi-key"></span>Token Adres</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <input type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Enter token"
+          <input type="text" class="form-control col-12 mt-3 mx-auto" id="input-token" v-model="token" placeholder="Enter Token"
             style="max-width: 450px;">
         </div>
         <div class="mt-3">
           <label for="request_date" class="col-12"><span class="pi pi-calendar"></span>Tarih Seçim</label><br>
-          <Calendar class="mt-2" v-model="date" dateFormat="mm/yy" id="request-date" />
+          <Calendar class="mt-2 col-12 mx-auto" v-model="date" dateFormat="mm/yy" id="request-date" style="max-width: 450px;" placeholder="Enter Date"/>
 
         </div>
         <div class="mt-4 pb-2">
@@ -38,132 +38,63 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">pos_banka_vkn</th>
+              <th scope="col">pos_uye_isyeri</th>
+              <th scope="col">pos_banka_adi</th>
+              <th scope="col">toplam</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
               <td>@mdo</td>
-              <th scope="row">1</th>
               <td>Mark</td>
               <td>Otto</td>
-              <td>@mdo</td>
             </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+           
           </tbody>
         </table>
       </div>
@@ -305,7 +236,7 @@ export default {
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
-          link.download = this.date + '_dosya_adi.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
+          link.download = this.date + '_gib.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
           link.click();
 
           // Bellekten URL'yi temizle
