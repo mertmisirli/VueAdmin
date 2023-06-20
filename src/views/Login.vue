@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="col-12 col-md-6 col-xs-10 mt-5 mb-5 user-info rounded-3 d-flex align-items-center justify-content-center">
+        <div class="col-12 col-md-5 col-xs-10 mt-5 mb-5 user-info rounded-3 d-flex align-items-center justify-content-center">
             <form @submit.prevent="login">
                 <div>
                     <label for="username"><span class="pi pi-user"></span>Username</label><br>

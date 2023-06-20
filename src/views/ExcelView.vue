@@ -6,36 +6,45 @@
   <Toast />
 
   <h3 class="mt-3 title">Excel Operations</h3>
-  <div class="row mt-5">
-    <div class="col-3 bg-secondary rounded-4 m-2" style="height: 350px;">
-      <div class="container  mt-3">
-        <label for="input-token">Token Adresi</label>
-        <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-        <input type="text" class="form-control mt-3" id="input-token" v-model="token" placeholder="Enter token"
-          style="max-width: 450px;">
-
-      </div>
-      <div class="mt-3">
-        <label for="request_date" class="">Select Date</label>
-        <Calendar class="mt-2" v-model="date" dateFormat="mm/yy" id="request_date" style="width: 450px;" />
-      </div>
-      <div class="mt-4">
-        <Button @click="getExcelFile" class="" type="submit" label="İndir" style="height: 45px;" />
+  <div class="row mt-5 m-2">
+    <!-- Authentication Part -->
+    <div class="col-12 col-md-3 bg-secondary rounded-4 m-2" style="height: 350px;">
+      <div class="col-12 bg-danger">
+        <div class="mt-3 col-12 bg-warning">
+          <label for="input-token">Token Adresi</label>
+          <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
+          <input type="text" class="form-control mt-3" id="input-token" v-model="token" placeholder="Enter token"
+            style="max-width: 450px;">
+        </div>
+        <div class="mt-3">
+          <label for="request_date" class="">Select Date</label>
+          <Calendar class="mt-2" v-model="date" dateFormat="mm/yy" id="request_date" style="width: 450px;" />
+        </div>
+        <div class="mt-4">
+          <Button @click="getExcelFile" class="" type="submit" label="İndir" style="height: 45px;" />
+        </div>
       </div>
     </div>
-    <div class="col-6 m-1 rounded-3 bg-success pt-4">
+
+    <!-- Content Part -->
+    <div class="col-12 col-md-8 m-1 rounded-3 bg-success pt-4">
       <div>
         <h3>Excel Content Part</h3>
       </div>
-      
-      <div class="d-flex justify-content-center">
-        <ul class="list-group list-group-vertical">
-          <li class="list-group-item">pos_banka_vkn</li>
-          <li class="list-group-item">pos_uye_isyeri</li>
-          <li class="list-group-item">pos_banka_adi</li>
-          <li class="list-group-item">toplam</li>
+
+      <div class="col-4 col-md-12 d-flex justify-content-center bg-primary pt-3">
+        <ul class="row g-3 mr-3 text-space">
+          <li class="col-md-3 col-12 list-group-item">pos_banka_vkn</li>
+          <li class="col-md-3 col-12 list-group-item">pos_uye_isyeri</li>
+          <li class="col-md-3 col-12 list-group-item">pos_banka_adi</li>
+          <li class="col-md-3 col-12 list-group-item">toplam</li>
         </ul>
       </div>
+
+      <div class="col-12 bg-secondary pt-2">
+        <p>Content</p>
+      </div>
+
     </div>
   </div>
 
