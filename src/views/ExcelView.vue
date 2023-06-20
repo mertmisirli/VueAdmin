@@ -6,45 +6,167 @@
   <Toast />
 
   <h3 class="mt-3 title">Excel Operations</h3>
-  <div class="row mt-5 m-2">
+  <div class="row mt-5 m-4 ">
     <!-- Authentication Part -->
-    <div class="col-12 col-md-3 bg-secondary rounded-4 m-2" style="height: 350px;">
-      <div class="col-12 bg-danger">
-        <div class="mt-3 col-12 bg-warning">
-          <label for="input-token">Token Adresi</label>
+      <div class="data-info col-12 col-md-2 mb-2 p-2 rounded-3">
+        <div class="mt-3 pb-3 ">
+          <label for="input-token"><span class="pi pi-key"></span>Token Adres</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <input type="text" class="form-control mt-3" id="input-token" v-model="token" placeholder="Enter token"
+          <input type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Enter token"
             style="max-width: 450px;">
         </div>
         <div class="mt-3">
-          <label for="request_date" class="">Select Date</label>
-          <Calendar class="mt-2" v-model="date" dateFormat="mm/yy" id="request_date" style="width: 450px;" />
+          <label for="request_date" class="col-12"><span class="pi pi-calendar"></span>Tarih Seçim</label><br>
+          <Calendar class="mt-2" v-model="date" dateFormat="mm/yy" id="request-date" />
+
         </div>
-        <div class="mt-4">
+        <div class="mt-4 pb-2">
           <Button @click="getExcelFile" class="" type="submit" label="İndir" style="height: 45px;" />
         </div>
       </div>
+
+    <div class="col-1">
     </div>
-
     <!-- Content Part -->
-    <div class="col-12 col-md-8 m-1 rounded-3 bg-success pt-4">
-      <div>
-        <h3>Excel Content Part</h3>
-      </div>
+    <div class="content-part col-12 col-md-9 ml-4 rounded-3 ">
+      
+      <h3 class="mt-3">Excel Content Part</h3>
 
-      <div class="col-4 col-md-12 d-flex justify-content-center bg-primary pt-3">
-        <ul class="row g-3 mr-3 text-space">
-          <li class="col-md-3 col-12 list-group-item">pos_banka_vkn</li>
-          <li class="col-md-3 col-12 list-group-item">pos_uye_isyeri</li>
-          <li class="col-md-3 col-12 list-group-item">pos_banka_adi</li>
-          <li class="col-md-3 col-12 list-group-item">toplam</li>
-        </ul>
+      <div class="table-responsive mt-4">
+        <table class="table table-striped">
+          <caption>List of users</caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="col-12 bg-secondary pt-2">
-        <p>Content</p>
-      </div>
-
     </div>
   </div>
 
@@ -265,11 +387,10 @@ const showError = (message) => {
 </script>
 
 <style>
+
 .btn-groups Button {
   margin-left: 15px;
   height: 40px;
-
-
 }
 
 #excel-btn {
@@ -280,6 +401,17 @@ const showError = (message) => {
   margin-left: 15px;
   color: p-button-primary;
 }
+
+.data-info {
+  box-shadow: 3px 7px 13px 6px #888888;
+  background-color: rgba(231, 226, 226, 0.737);
+}
+
+.content-part {
+  background-color: rgba(237, 236, 236, 0.851);
+}
+
+
 
 .table-cols ul li {}
 
