@@ -6,100 +6,72 @@
   <Toast />
 
   <h3 class="mt-3 title">Excel Operations</h3>
-  <div class="row mt-5 m-4 ">
-    <!-- Authentication Part -->
-      <div class="data-info col-12 col-md-2 mb-2 p-2 rounded-3">
+
+  <div class="container">
+    <div class="row justify-content-end order-2">
+      <div class="col-12 col-md-3 col-auto ">
+        <button type="button" class="btn btn-primary ">Veritabanına Kayıt</button>
+      </div>
+    </div>
+
+    <div class="row mt-5 m-4 order-1 ">
+      <!-- Authentication Part -->
+      <div class="data-info col-12 col-md-2 mb-2 p-2 rounded-3" style="max-height: 300px;">
         <div class="mt-3 pb-3 ">
-          <label for="input-token"><span class="pi pi-key"></span>Token Adres</label><br>
+          <label for="input-token"><span class="pi pi-key"></span>Token</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <input type="text" class="form-control col-12 mt-3 mx-auto" id="input-token" v-model="token" placeholder="Enter Token"
+          <input type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Token Girin"
             style="max-width: 450px;">
         </div>
         <div class="mt-3">
-          <label for="request_date" class="col-12"><span class="pi pi-calendar"></span>Tarih Seçim</label><br>
-          <Calendar class="mt-2 col-12 mx-auto" v-model="date" dateFormat="mm/yy" id="request-date" style="max-width: 450px;" placeholder="Enter Date"/>
-
+          <label for="request_date" class="col-12" style="font-family: Helvetica, Arial, sans-serif;"><span
+              class="pi pi-calendar"></span>Tarih</label><br>
+          <Calendar class="mt-2 col-12" view="month" v-model="date" :locale="localeSettings" dateFormat="mm/yy"
+            id="request-date" style="max-width: 450px;" placeholder="Tarih Seçin" />
         </div>
         <div class="mt-4 pb-2">
           <Button @click="getExcelFile" class="" type="submit" label="İndir" style="height: 45px;" />
         </div>
       </div>
 
-    <div class="col-1">
-    </div>
-    <!-- Content Part -->
-    <div class="content-part col-12 col-md-9 ml-4 rounded-3 ">
-      
-      <h3 class="mt-3">Excel Content Part</h3>
-
-      <div class="table-responsive mt-4">
-        <table class="table table-striped">
-          <caption>List of users</caption>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">pos_banka_vkn</th>
-              <th scope="col">pos_uye_isyeri</th>
-              <th scope="col">pos_banka_adi</th>
-              <th scope="col">toplam</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-           
-          </tbody>
-        </table>
+      <!-- Space -->
+      <div class="col-12 col-md-1 my-2 my-md-0" style="height: 50px; ">
       </div>
+
+      <!-- Content Part -->
+      <div class="content-part col-12 col-md-9 ml-4 rounded-3 ">
+        <div class="table-responsive mt-2" style="max-height:450px;">
+          <table class="table table-striped">
+            <caption></caption>
+            <tbody>
+              <tr v-for="(user, index) in excelData" :key="index">
+                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">#</td>
+                <td v-else>{{ index }}</td>
+
+                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[0] }}</td>
+                <td v-else>{{ user[0] }}</td>
+
+                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[1] }}</td>
+                <td v-else>{{ user[1] }}</td>
+
+                <td v-if="index === 0" class="sticky-row" style="font-size: 14px; background-color: rgb(40, 200, 240);">{{
+                  user[2] }}</td>
+                <td v-else style="font-size: 14px;">{{ user[2] }}</td>
+
+                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[3] }}</td>
+                <td v-else>{{ user[3] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
     </div>
   </div>
+
+
+
 
 
 
@@ -121,13 +93,13 @@
     </div> -->
 
     <!-- Getting Excel File From the User-->
-    <div class="m-5">
+    <!-- <div class="m-5">
       <label for="formFile" class="form-label">Dosya Seçin</label>
       <input class="form-control" type="file" id="formFile" accept=".xlsx, .xls" @change="handleFileSelect">
-    </div>
+    </div> -->
 
     <!-- Show Columns of Selected Excel File -->
-    <div>
+    <!-- <div>
       <h4>File Content</h4>
 
       <div class="row mt-5 mb-5">
@@ -143,7 +115,7 @@
       </div>
 
 
-    </div>
+    </div> -->
 
 
     <!-- <div v-for="student in students" :key="student.id">
@@ -155,11 +127,24 @@
 <script>
 import * as XLSX from 'xlsx';
 import NavbarView from '../components/NavBar.vue'
+import Calendar from 'primevue/calendar';
+
+try {
+  if (this.excelData.length === 0) {
+    const storedData = localStorage.getItem('excelData');
+    if (storedData) {
+      this.excelData = JSON.parse(storedData);
+    }
+  }
+} catch (error) {
+
+}
 
 export default {
   name: 'ExcelView',
   components: {
-    NavbarView
+    NavbarView,
+    Calendar
   },
   data() {
     return {
@@ -168,6 +153,36 @@ export default {
         // {id:2, name:'Ali', not:75},
         // {id:3, name:'Mehmet', not:85},
       ],
+      localeSettings: {
+        monthNames: [
+          'Ocak',
+          'Şubat',
+          'Mart',
+          'Nisan',
+          'Mayıs',
+          'Haziran',
+          'Temmuz',
+          'Ağustos',
+          'Eylül',
+          'Ekim',
+          'Kasım',
+          'Aralık'
+        ],
+        monthNamesShort: [
+          'Oca',
+          'Şub',
+          'Mar',
+          'Nis',
+          'May',
+          'Haz',
+          'Tem',
+          'Ağu',
+          'Eyl',
+          'Eki',
+          'Kas',
+          'Ara'
+        ]
+      }
 
     }
   },
@@ -185,7 +200,7 @@ export default {
 
           const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
-          const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+          excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
           console.log(excelData.length);
 
@@ -209,19 +224,15 @@ export default {
       }
     },
     getExcelFile() {
-
       if (this.token === undefined || this.token === '' || this.date === undefined) {
-        this.showError('Token or Date Can Not Be Empty ')
+        this.showError('Token or Date Can Not Be Empty ');
         return 0;
       }
+
       const excel_request_data = {
         "token": this.token,
         "date": this.date
-      }
-
-      console.log("Json Data Token : " + excel_request_data.token + " Date : " + excel_request_data.date);
-      console.log("Butona Tiklandi ve Api Url : " + this.apiUrl);
-      console.log("Selected Date : " + this.date);
+      };
 
       fetch(this.apiUrl + '/excel/getfile', {
         method: 'POST',
@@ -232,48 +243,58 @@ export default {
       })
         .then(response => response.blob())
         .then(blob => {
-          // Blob'u indir
+          const fileReader = new FileReader();
+
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
+          const month = this.date.getMonth() + 1;
+          const year = this.date.getFullYear();
           link.href = url;
-          link.download = this.date + '_gib.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
+          link.download = month + '-' + year + '-gib.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
           link.click();
 
           // Bellekten URL'yi temizle
+
+
+          fileReader.onload = (e) => {
+            const arrayBuffer = e.target.result;
+            const data = new Uint8Array(arrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            this.excelData = jsonData;
+
+            for (let index = 0; index < this.excelData.length; index++) {
+              const element = this.excelData[index][2];
+              console.log(element);
+
+            }
+
+            console.log("Length : " + this.excelData.length);
+            localStorage.setItem('excelData', JSON.stringify(this.excelData));
+
+          };
+          fileReader.readAsArrayBuffer(blob);
           URL.revokeObjectURL(url);
+
         })
         .catch(error => {
           console.error('Excel dosyasi indirme hatasi:', error);
         });
-
-
-      // fetch((this.apiUrl + '/excel/getfile'), {
-      //   method : 'POST',
-      //   headers : {
-
-      //   }, 
-      //   body : JSON.stringify()
-
-      // })
-
-
-      // fetch('http://13.53.84.126:3000/login', {
-      //               method: 'POST',
-      //               headers: {
-      //                   'Content-Type': 'application/json'
-      //               },
-      //               body: JSON.stringify(formData)
-      //           })
-      //               .then(response => response.json())
-      //               .then(data => {
-      //                   console.log(data);
-      //                   // İşlemler devam ediyor...
-      //               })
-      //               .catch(error => {
-      //                   console.log(error);
-      //               });
-
     }
+  },
+  mounted() {
+    try {
+      const storedData = localStorage.getItem('excelData');
+      if (storedData) {
+        this.excelData = JSON.parse(storedData);
+        console.log("mounted " + this.excelData);
+      }
+    } catch (error) {
+      console.log("mounted error");
+    }
+  },
+  created() {
   }
 }
 
@@ -285,6 +306,13 @@ export default {
 import { ref } from "vue";
 import { inject } from 'vue';
 import { useToast } from "primevue/usetoast";
+
+var eleman = ref()
+var excelData = ref()
+eleman = "deger"
+
+
+
 
 const date = ref();
 const token = ref();
@@ -318,7 +346,6 @@ const showError = (message) => {
 </script>
 
 <style>
-
 .btn-groups Button {
   margin-left: 15px;
   height: 40px;
@@ -340,6 +367,16 @@ const showError = (message) => {
 
 .content-part {
   background-color: rgba(237, 236, 236, 0.851);
+  box-shadow: 2px 2px 5px 0px #888888
+}
+
+.sticky-row {
+  position: sticky;
+  top: 0;
+  background-color: #e2b87d;
+  /* İstediğiniz arka plan rengini burada belirtebilirsiniz */
+  font-weight: bold;
+  color: red;
 }
 
 
