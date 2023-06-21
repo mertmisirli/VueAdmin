@@ -5,18 +5,15 @@
 
   <Toast />
 
-  <h3 class="mt-3 title">Excel Operations</h3>
+  <!-- <h3 class="mt-3 title">Excel Operations</h3> -->
 
-  <div class="container">
-    <div class="row justify-content-end order-2">
-      <div class="col-12 col-md-3 col-auto ">
-        <button type="button" class="btn btn-primary ">Veritabanına Kayıt</button>
-      </div>
-    </div>
+  
+  <div class="">
+    
 
     <div class="row mt-5 m-4 order-1 ">
       <!-- Authentication Part -->
-      <div class="data-info col-12 col-md-2 mb-2 p-2 rounded-3" style="max-height: 300px;">
+      <div class="data-info col-12 col-md-2 mt-5 mb-2 p-2 rounded-3" style="max-height: 300px;">
         <div class="mt-3 pb-3 ">
           <label for="input-token"><span class="pi pi-key"></span>Token</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
@@ -30,7 +27,7 @@
             id="request-date" style="max-width: 450px;" placeholder="Tarih Seçin" />
         </div>
         <div class="mt-4 pb-2">
-          <Button @click="getExcelFile" class="" type="submit" label="İndir" style="height: 45px;" />
+          <Button @click="getExcelFile" class="rounded-2" type="submit" label="İndir" style="height: 45px;" />
         </div>
       </div>
 
@@ -39,26 +36,35 @@
       </div>
 
       <!-- Content Part -->
-      <div class="content-part col-12 col-md-9 ml-4 rounded-3 ">
-        <div class="table-responsive mt-2" style="max-height:450px;">
+      <div class=" col-12 col-md-9 ml-4 ">
+        <div class="row justify-content-end">
+          <div class="col-9">
+            <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;" placeholder="Bir Kelime Yazın" >
+          </div>
+          <div class="col-3 justify-content-end">
+            <!-- Adding data to Sql -->
+            <Button @click="addToSql()" class="rounded-2" type="submit" label="Filtre" style="height: 40px;" />
+          </div>
+        </div>
+        <div class="content-part rounded-3 table-responsive mt-md-2 mt-3" style="height:450px;">
           <table class="table table-striped">
             <caption></caption>
             <tbody>
               <tr v-for="(user, index) in excelData" :key="index">
-                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">#</td>
+                <td v-if="index === 0" class="sticky-row bg-info" >#</td>
                 <td v-else>{{ index }}</td>
 
-                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[0] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[0] }}</td>
                 <td v-else>{{ user[0] }}</td>
 
-                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[1] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[1] }}</td>
                 <td v-else>{{ user[1] }}</td>
 
-                <td v-if="index === 0" class="sticky-row" style="font-size: 14px; background-color: rgb(40, 200, 240);">{{
+                <td v-if="index === 0" class="sticky-row bg-info" style="font-size: 14px; background-color: rgb(40, 200, 240);">{{
                   user[2] }}</td>
                 <td v-else style="font-size: 14px;">{{ user[2] }}</td>
 
-                <td v-if="index === 0" class="sticky-row" style="background-color: rgb(40, 200, 240);">{{ user[3] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[3] }}</td>
                 <td v-else>{{ user[3] }}</td>
               </tr>
             </tbody>
@@ -148,11 +154,6 @@ export default {
   },
   data() {
     return {
-      students: [
-        // {id:1, name:'Varol', not:55},
-        // {id:2, name:'Ali', not:75},
-        // {id:3, name:'Mehmet', not:85},
-      ],
       localeSettings: {
         monthNames: [
           'Ocak',
@@ -229,9 +230,13 @@ export default {
         return 0;
       }
 
+      const day   = this.date.getDay()
+      const month = this.date.getMonth() + 1
+      const year  = this.date.getFullYear()
+
       const excel_request_data = {
         "token": this.token,
-        "date": this.date
+        "date":  month + '-' + year
       };
 
       fetch(this.apiUrl + '/excel/getfile', {
@@ -281,6 +286,9 @@ export default {
         .catch(error => {
           console.error('Excel dosyasi indirme hatasi:', error);
         });
+    },
+    addToSql() {
+
     }
   },
   mounted() {
@@ -307,12 +315,7 @@ import { ref } from "vue";
 import { inject } from 'vue';
 import { useToast } from "primevue/usetoast";
 
-var eleman = ref()
 var excelData = ref()
-eleman = "deger"
-
-
-
 
 const date = ref();
 const token = ref();

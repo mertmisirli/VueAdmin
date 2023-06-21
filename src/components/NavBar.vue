@@ -18,7 +18,7 @@ import { ref } from "vue";
 
 const items = ref([
     {
-        label   : 'Home',
+        label   : 'Anasayfa',
         icon    : 'pi pi-fw pi-home',
         to      : '/home'
 
@@ -34,23 +34,23 @@ const items = ref([
         to      : 'excel',
         items: [
                 {
-                    label: 'Bookmark',
+                    label: 'İmport',
                     icon: 'pi pi-fw pi-bookmark'
                 },
                 {
-                    label: 'Video',
+                    label: 'Export',
                     icon: 'pi pi-fw pi-video'
                 }
             ]
     },
     {
-        label   : 'Get All Data',
+        label   : 'Verileri Al',
         icon    : 'pi pi-check'
     },
-    {
-        label   : 'Export from Excel',
-        icon    : 'pi pi-file-export'
-    }
+    //{
+        //label   : 'Kayıtlı Verileri Getir',
+        //icon    : 'pi pi-file-export'
+    //}
 
 ])
 
