@@ -7,7 +7,7 @@
             </template>
             <template #end>
                 <!-- <InputText placeholder="Search" type="text" /> -->
-                <router-link :to="{name:'login'}" class="m-5" style="text-decoration: none;">Logout</router-link>
+                <router-link :to="{name:'login'}" class="m-5" style="text-decoration: none;">Çıkış</router-link>
             </template>
         </Menubar>
     </div>

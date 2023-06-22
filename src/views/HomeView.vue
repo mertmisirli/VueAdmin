@@ -12,7 +12,7 @@
 
   <div class="mt-5">
     <img alt="Vue logo" src="../assets/logo.png">
-    <h2>Home Page</h2>
+    <h2>Anasayfa</h2>
     <!-- <HelloWorld msg="Welcome to home Vue.js App"/> -->
   </div>
 </template>

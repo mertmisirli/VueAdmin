@@ -1,3 +1,12 @@
+<!-- Bayi İşlemleri için Buton Altına devam eden butonlar -->
+<!-- Token Ekleme Alanı Yatay Tablonun Üstüne-->
+<!-- Tarih Gün Seçimi Kaldır -->
+<!-- Uzak Bilgisayar Docker Configure Ayarları -->
+<!-- Veritabanı Entity Ayarları -->
+<!-- Geçmiş Dönem Belgeler Log ve Kayıt edilsin ve Tekrar Gib Bağlanma ihtiyac Yok -->
+<!-- Filtre İşlemleri || Banka Ad || Toplam Değer Sıralama -->
+
+
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
@@ -15,15 +24,16 @@
         <div class="mt-3 pb-3 ">
           <label for="input-token"><span class="pi pi-key"></span>Token</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <textarea type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Token Girin"
-            style="max-width: 450px; max-height: 150px;"></textarea>
+          <textarea type="text" class="form-control mt-3 mx-auto w-100" id="input-token" v-model="token" placeholder="Token Girişi"
+            style="max-height: 150px;"></textarea>
         </div>
-
-        <div class="mt-3">
+        <div class="mt-3 col-center">
           <label for="request_date" class="col-12" style="font-family: Helvetica, Arial, sans-serif;"><span
-              class="pi pi-calendar"></span>Tarih</label><br>
-          <Calendar class="mt-2 col-12" view="month" v-model="date" :locale="localeSettings" dateFormat="mm/yy"
-            id="request-date" style="max-width: 450px;" placeholder="Tarih Seçin" />
+              class="pi pi-calendar mb-2"></span>Tarih</label><br>
+              <input type="date" class="form-control w-100" placeholder="Tarih" v-model="date" onfocus="this.showPicker()" dateFormat="dd/mm/yy" >
+
+              <!-- <Calendar class="mt-2 col-12" v-model="date" :locale="localeSettings" dateFormat="dd/mm/yy"
+            id="request-date" style="max-width: 450px;" placeholder="Tarih Seçin" /> -->
         </div>
         <div class="mt-4 pb-2">
           <Button @click="getExcelFile" class="rounded-2" type="submit" label="İndir" style="height: 45px;" />
@@ -37,10 +47,10 @@
       <!-- Content Part -->
       <div class=" col-12 col-md-9 ml-4 ">
         <div class="row justify-content-end">
-          <div class="col-9">
+          <div class="col-10">
             <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;" placeholder="Arama Yapın" >
           </div>
-          <div class="col-3 justify-content-end">
+          <div class="col-2 justify-content-end">
             <!-- Adding data to Sql -->
             <Button @click="addToSql()" class="rounded-2" type="submit" label="Filtre" style="height: 40px;" />
           </div>
@@ -71,9 +81,30 @@
         </div>
 
       </div>
+    </div>
 
+    <div class="row mt-5 m-4 order-1 ">
+      <div class="col-12 col-md-4 mb-4 bg-warning">
+        <div class="card h-md-100 mt-2">
+          <p class="mt-2">İşlem Geçmişi</p>
+        </div>
+        <ul style="list-style-type: none;" class="mt-5 card">
+            <li><span></span>İndirildi</li>
+            <li><span></span>Hatalı Token</li>
+            <li><span></span>23/06 İndirildi</li>
+            <li><span></span>Dosya Veritabanından Çekildi</li>
+            <li><span></span>Veritabanına Kayıt Edildi</li>
+          </ul>
+      </div>
+      <div class="col-12 col-md-7 bg-danger" style="height: 450px;">
+        <p class="bg-white">İndirme Geçmişi</p>
+      </div>
     </div>
   </div>
+
+
+  <!-- Example Dashboard Template  -->
+  <!-- https://preview.themeforest.net/item/metronic-responsive-admin-dashboard-template/full_screen_preview/4021469?_ga=2.165255103.1015261567.1687434573-213871109.1687241792 -->
 
 
 
@@ -226,17 +257,22 @@ export default {
     },
     getExcelFile() {
       if (this.token === undefined || this.token === '' || this.date === undefined) {
-        this.showError('Token or Date Can Not Be Empty ');
+        this.showError('Token veya Tarih Geçersiz');
         return 0;
       }
 
-      const day   = this.date.getDay()
-      const month = this.date.getMonth() + 1
-      const year  = this.date.getFullYear()
+      console.log(this.date);
+
+      const fullDate = this.date.toString();
+      const year  = fullDate.substr(0,4);
+      const month = fullDate.substr(5,2);
+      const day   = fullDate.substr(8,2)
+      //const year  = this.date.getFullYear()
+      console.log(day + '-' + month + '-' + year);
 
       const excel_request_data = {
         "token": this.token,
-        "date":  month + '-' + year
+        "date":  day + '-' + month + '-' + year
       };
 
       fetch(this.apiUrl + 'excel/getfile', {
@@ -252,8 +288,7 @@ export default {
 
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
-          const month = this.date.getMonth() + 1;
-          const year = this.date.getFullYear();
+
           link.href = url;
           link.download = month + '-' + year + '-gib.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
           link.click();
@@ -271,12 +306,14 @@ export default {
 
             for (let index = 0; index < this.excelData.length; index++) {
               const element = this.excelData[index][2];
-              console.log(element);
+              //console.log(element);
 
             }
 
             console.log("Length : " + this.excelData.length);
             localStorage.setItem('excelData', JSON.stringify(this.excelData));
+
+            this.showSuccess(month + "/" + year + '-gib.xlsx' + ' Dosyası İndirildi')
 
           };
           fileReader.readAsArrayBuffer(blob);
@@ -296,7 +333,6 @@ export default {
       const storedData = localStorage.getItem('excelData');
       if (storedData) {
         this.excelData = JSON.parse(storedData);
-        console.log("mounted " + this.excelData);
       }
     } catch (error) {
       console.log("mounted error");
@@ -331,19 +367,19 @@ const columns = ref([
 const toast = useToast();
 
 const showSuccess = (message) => {
-  toast.add({ severity: 'success', summary: 'Success Message', detail: message, life: 3000 });
+  toast.add({ severity: 'success', summary: 'Başarılı', detail: message, life: 3000 });
 };
 
 const showInfo = (message) => {
-  toast.add({ severity: 'info', summary: 'Info Message', detail: message, life: 3000 });
+  toast.add({ severity: 'info', summary: 'Bilgi', detail: message, life: 3000 });
 };
 
 const showWarn = (message) => {
-  toast.add({ severity: 'warn', summary: 'Warn Message', detail: message, life: 3000 });
+  toast.add({ severity: 'warn', summary: 'Uyarı', detail: message, life: 3000 });
 };
 
 const showError = (message) => {
-  toast.add({ severity: 'error', summary: 'Error Message', detail: message, life: 3000 });
+  toast.add({ severity: 'error', summary: 'Hata', detail: message, life: 3000 });
 };
 
 </script>

@@ -62,7 +62,8 @@ export default {
             // Checking username and password 
             if (this.username === 'admin' && this.password === 'password') {
                 // Redirects to dashboard if authentication is successful
-
+                
+                
                 this.$router.push({ name: 'home' });
 
                 // axios.post('http://13.53.84.126:3000/login', formData)
@@ -74,7 +75,8 @@ export default {
                 //     .catch(error => {
                 //         console.log(error);
                 //     })
-                fetch('http://13.53.84.126:3000/login', {
+                log("Api Url : " + this.apiUrl);
+                fetch(this.apiUrl + 'login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -85,6 +87,11 @@ export default {
                     .then(data => {
                         console.log(data);
                         // İşlemler devam ediyor...
+                        this.isAuthenticated = data.isAuthenticated
+
+                        if(this.isAuthenticated){
+                            this.$router.push({ name: 'home' });
+                        }
                     })
                     .catch(error => {
                         console.log(error);
