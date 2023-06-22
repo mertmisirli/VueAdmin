@@ -9,8 +9,6 @@
 
   
   <div class="">
-    
-
     <div class="row mt-5 m-4 order-1 ">
       <!-- Authentication Part -->
       <div class="data-info col-12 col-md-2 mt-5 mb-2 p-2 rounded-3" style="max-height: 300px;">
@@ -239,7 +237,7 @@ export default {
         "date":  month + '-' + year
       };
 
-      fetch(this.apiUrl + '/excel/getfile', {
+      fetch(this.apiUrl + 'excel/getfile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

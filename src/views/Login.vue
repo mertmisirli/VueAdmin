@@ -72,7 +72,7 @@ export default {
                 //     .catch(error => {
                 //         console.log(error);
                 //     })
-                fetch((this.apiUrl + '/login'), {
+                fetch((this.apiUrl + 'login'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -81,8 +81,8 @@ export default {
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
-                        // İşlemler devam ediyor...
+                        console.log("Login data : " + data);
+                        // İşlemler...
                     })
                     .catch(error => {
                         console.log(error);

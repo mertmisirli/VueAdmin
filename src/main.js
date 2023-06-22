@@ -20,7 +20,8 @@ import ToastService from 'primevue/toastservice';
 
 const app = createApp(App);
 
-const apiUrl = "http://localhost:8095/api/v1";
+const apiUrl = "http://localhost:8095/api/v1/";
+//const apiUrl = "http://13.53.84.126:3000/";
 app.provide('apiUrl', apiUrl);
 
 app.use(PrimeVue);
