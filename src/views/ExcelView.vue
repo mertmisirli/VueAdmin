@@ -11,13 +11,14 @@
   <div class="">
     <div class="row mt-5 m-4 order-1 ">
       <!-- Authentication Part -->
-      <div class="data-info col-12 col-md-2 mt-5 mb-2 p-2 rounded-3" style="max-height: 300px;">
+      <div class="data-info col-12 col-md-2 mt-5 mb-2 p-2 rounded-3" style="max-height: 450px;">
         <div class="mt-3 pb-3 ">
           <label for="input-token"><span class="pi pi-key"></span>Token</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <input type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Token Girin"
-            style="max-width: 450px;">
+          <textarea type="text" class="form-control mt-3 mx-auto" id="input-token" v-model="token" placeholder="Token Girin"
+            style="max-width: 450px; max-height: 150px;"></textarea>
         </div>
+
         <div class="mt-3">
           <label for="request_date" class="col-12" style="font-family: Helvetica, Arial, sans-serif;"><span
               class="pi pi-calendar"></span>Tarih</label><br>
@@ -37,7 +38,7 @@
       <div class=" col-12 col-md-9 ml-4 ">
         <div class="row justify-content-end">
           <div class="col-9">
-            <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;" placeholder="Bir Kelime Yazın" >
+            <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;" placeholder="Arama Yapın" >
           </div>
           <div class="col-3 justify-content-end">
             <!-- Adding data to Sql -->
@@ -126,13 +127,14 @@
       <router-link :to="{name:'studentInfo',params:{id:student.id}}">{{student.name}}</router-link>
     </div> -->
   </div>
+  <Footer/>
 </template>
 
 <script>
 import * as XLSX from 'xlsx';
 import NavbarView from '../components/NavBar.vue'
 import Calendar from 'primevue/calendar';
-
+import Footer from '../components/Footer.vue'
 try {
   if (this.excelData.length === 0) {
     const storedData = localStorage.getItem('excelData');

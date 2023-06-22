@@ -34,12 +34,12 @@ const items = ref([
         to      : 'excel',
         items: [
                 {
-                    label: 'İmport',
-                    icon: 'pi pi-fw pi-bookmark'
+                    label: 'Getir',
+                    icon: 'pi pi-fw pi-file-import'
                 },
                 {
-                    label: 'Export',
-                    icon: 'pi pi-fw pi-video'
+                    label: 'Aktar',
+                    icon: 'pi pi-file-export'
                 }
             ]
     },
@@ -177,4 +177,5 @@ const items = ref([
 //         icon: 'pi pi-fw pi-power-off'
 //     }
 // ]);
+
 </script>

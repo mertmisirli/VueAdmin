@@ -46,6 +46,7 @@ const checked = ref(false);
 export default {
     data() {
         return {
+            isAuthenticated: '',
             username: '',
             password: ''
         };
@@ -83,6 +84,10 @@ export default {
                     .then(data => {
                         console.log("Login data : " + data);
                         // İşlemler...
+                        const token = data.token;
+                        localStorage.setItem('token', token);
+                        this.isAuthenticated = true;
+
                     })
                     .catch(error => {
                         console.log(error);
@@ -94,6 +99,19 @@ export default {
                 // If fails to login logs error message 
                 this.showError('Wrong username or password')
             }
+        },
+
+        logout() {
+            localStorage.removeItem('token');
+            this.isAuthenticated = false;
+            
+        }
+    },
+
+    created() {
+        const token = localStorage.getItem('token');
+        if(token){
+            this.isAuthenticated = true;
         }
     }
 };
