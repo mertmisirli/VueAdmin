@@ -19,7 +19,7 @@
 
 
   <div class="">
-    <div class="row mt-5 mx-5 order-1 ">
+    <div class="row mt-5 mx-5 order-1">
       <!-- Authentication Part -->
       <div class="data-info col-12 mt-5 mb-5 rounded-3" style="max-height: 450px;">
         <div class="mt-3 pb-3 ">
@@ -43,20 +43,22 @@
       </div>
 
       <!-- Content Part -->
-      <div class=" col-12 bg-success ">
+      <div class=" col-12 bg-secondary rounded-3">
+        <!-- Filter Part -->
         <div class="row justify-content-end">
+          <!-- Filter Input Area  -->
           <div class="col-9">
             <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;"
               placeholder="Arama Yapın">
           </div>
           <div class="col-3 justify-content-end">
             <!-- Adding data to Sql -->
-
-
             <Button @click="addToSql()" class="rounded-2" type="submit" label="Filtre" style="height: 40px;" />
           </div>
         </div>
-        <div class="content-part rounded-3 table-responsive mt-md-2 mt-3" style="height:450px;">
+
+        <!-- Form Data Part -->
+        <div class="content-part rounded-3 table-responsive mt-md-2 mt-3 mb-3" style="height:450px;">
           <table class="table table-striped">
             <caption></caption>
             <tbody>
@@ -96,8 +98,13 @@
           <p class="mt-2">İşlem Geçmişi</p>
         </div>
         <ul style="list-style-type: none;" class="mt-5 card mx-auto">
-          <li><span class="mx-5 bg-success"><i class="pi pi-file-export"></i></span> İndirildi</li>
-          <li><span></span>Hatalı Token</li>
+          <li>
+            <span class="mx-5 bg-success">
+              <i class="pi pi-file-export"></i>
+            </span> İndirildi
+          </li>
+          <li>
+            <span></span>Hatalı Token</li>
           <li><span></span>23/06 İndirildi</li>
           <li><span></span>Dosya Veritabanından Çekildi</li>
           <li><span></span>Veritabanına Kayıt Edildi</li>
