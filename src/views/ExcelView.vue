@@ -1,6 +1,6 @@
-<!-- Bayi İşlemleri için Buton Altına devam eden butonlar -->
-<!-- Token Ekleme Alanı Yatay Tablonun Üstüne-->
-<!-- Tarih Gün Seçimi Kaldır -->
+<!-- //Bayi İşlemleri için Buton Altına devam eden butonlar -->
+<!-- //Token Ekleme Alanı Yatay Tablonun Üstüne-->
+<!-- //Tarih Gün Seçimi Kaldır -->
 <!-- Uzak Bilgisayar Docker Configure Ayarları -->
 <!-- Veritabanı Entity Ayarları -->
 <!-- Geçmiş Dönem Belgeler Log ve Kayıt edilsin ve Tekrar Gib Bağlanma ihtiyac Yok -->
@@ -9,6 +9,7 @@
 
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
   <NavbarView msg="NavBar Component" />
 
@@ -16,23 +17,24 @@
 
   <!-- <h3 class="mt-3 title">Excel Operations</h3> -->
 
-  
+
   <div class="">
-    <div class="row mt-5 m-4 order-1 ">
+    <div class="row mt-5 mx-5 order-1 ">
       <!-- Authentication Part -->
-      <div class="data-info col-12 col-md-2 mt-5 mb-2 p-2 rounded-3" style="max-height: 450px;">
+      <div class="data-info col-12 mt-5 mb-5 rounded-3" style="max-height: 450px;">
         <div class="mt-3 pb-3 ">
           <label for="input-token"><span class="pi pi-key"></span>Token</label><br>
           <!-- <InputText id="input-token" v-model="token" placeholder="Enter token" class="mt-2" /> -->
-          <textarea type="text" class="form-control mt-3 mx-auto w-100" id="input-token" v-model="token" placeholder="Token Girişi"
-            style="max-height: 150px;"></textarea>
+          <textarea type="text" class="form-control mt-3 mx-auto w-100" id="input-token" v-model="token"
+            placeholder="Token Girişi" style="max-height: 150px;"></textarea>
         </div>
         <div class="mt-3 col-center">
           <label for="request_date" class="col-12" style="font-family: Helvetica, Arial, sans-serif;"><span
               class="pi pi-calendar mb-2"></span>Tarih</label><br>
-              <input type="date" class="form-control w-100" placeholder="Tarih" v-model="date" onfocus="this.showPicker()" dateFormat="dd/mm/yy" >
+          <input type="month" class="form-control w-100" placeholder="Tarih" v-model="date" onfocus="this.showPicker()"
+            dateFormat="mm/yy">
 
-              <!-- <Calendar class="mt-2 col-12" v-model="date" :locale="localeSettings" dateFormat="dd/mm/yy"
+          <!-- <Calendar class="mt-2 col-12" view="month" v-model="date" :locale="localeSettings" dateFormat="mm/yy"
             id="request-date" style="max-width: 450px;" placeholder="Tarih Seçin" /> -->
         </div>
         <div class="mt-4 pb-2">
@@ -40,18 +42,17 @@
         </div>
       </div>
 
-      <!-- Space -->
-      <div class="col-12 col-md-1 my-2 my-md-0" style="height: 50px; ">
-      </div>
-
       <!-- Content Part -->
-      <div class=" col-12 col-md-9 ml-4 ">
+      <div class=" col-12 bg-success ">
         <div class="row justify-content-end">
-          <div class="col-10">
-            <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;" placeholder="Arama Yapın" >
+          <div class="col-9">
+            <input class="rounded-2 pt-1 pb-1 px-3 p-1" type="text " style="width: 100%; margin-top: 5px;"
+              placeholder="Arama Yapın">
           </div>
-          <div class="col-2 justify-content-end">
+          <div class="col-3 justify-content-end">
             <!-- Adding data to Sql -->
+
+
             <Button @click="addToSql()" class="rounded-2" type="submit" label="Filtre" style="height: 40px;" />
           </div>
         </div>
@@ -60,20 +61,24 @@
             <caption></caption>
             <tbody>
               <tr v-for="(user, index) in excelData" :key="index">
-                <td v-if="index === 0" class="sticky-row bg-info" >#</td>
+                <td v-if="index === 0" class="sticky-row bg-info">#</td>
                 <td v-else>{{ index }}</td>
 
-                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[0] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[0]
+                }}</td>
                 <td v-else>{{ user[0] }}</td>
 
-                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[1] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[1]
+                }}</td>
                 <td v-else>{{ user[1] }}</td>
 
-                <td v-if="index === 0" class="sticky-row bg-info" style="font-size: 14px; background-color: rgb(40, 200, 240);">{{
-                  user[2] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info"
+                  style="font-size: 14px; background-color: rgb(40, 200, 240);">{{
+                    user[2] }}</td>
                 <td v-else style="font-size: 14px;">{{ user[2] }}</td>
 
-                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[3] }}</td>
+                <td v-if="index === 0" class="sticky-row bg-info" style="background-color: rgb(40, 200, 240);">{{ user[3]
+                }}</td>
                 <td v-else>{{ user[3] }}</td>
               </tr>
             </tbody>
@@ -83,21 +88,40 @@
       </div>
     </div>
 
-    <div class="row mt-5 m-4 order-1 ">
-      <div class="col-12 col-md-4 mb-4 bg-warning">
-        <div class="card h-md-100 mt-2">
+    <div class="row mt-5 mx-5 m-4 order-1">
+
+      <!-- İşlem Geçmişi -->
+      <div class="col-12 col-md-3 mb-4 bg-secondary rounded-4" style="height: 510px;">
+        <div class="card h-md-100 mt-2 rounded-5 ">
           <p class="mt-2">İşlem Geçmişi</p>
         </div>
-        <ul style="list-style-type: none;" class="mt-5 card">
-            <li><span></span>İndirildi</li>
-            <li><span></span>Hatalı Token</li>
-            <li><span></span>23/06 İndirildi</li>
-            <li><span></span>Dosya Veritabanından Çekildi</li>
-            <li><span></span>Veritabanına Kayıt Edildi</li>
-          </ul>
+        <ul style="list-style-type: none;" class="mt-5 card mx-auto">
+          <li><span class="mx-5 bg-success"><i class="pi pi-file-export"></i></span> İndirildi</li>
+          <li><span></span>Hatalı Token</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>Veritabanına Kayıt Edildi</li>
+        </ul>
       </div>
-      <div class="col-12 col-md-7 bg-danger" style="height: 450px;">
-        <p class="bg-white">İndirme Geçmişi</p>
+
+
+      <div class="col-1">
+
+      </div>
+
+      <!-- İndirme Geçmişi -->
+      <div class="col-12 col-md-8  bg-secondary rounded-4" style="height: 510px;">
+        <div class="download-history-title">
+          <p class="card h-md-100 mt-2 rounded-5">İndirme Geçmişi</p>
+        </div>
+        <div class="content-part rounded-3 table-responsive mt-md-2 mt-3 mb-3" style="height:450px;">
+          <table class="table table-striped">
+           
+          </table>
+        </div>
+        <div class="download-history-list">
+
+        </div>
       </div>
     </div>
   </div>
@@ -107,58 +131,7 @@
   <!-- https://preview.themeforest.net/item/metronic-responsive-admin-dashboard-template/full_screen_preview/4021469?_ga=2.165255103.1015261567.1687434573-213871109.1687241792 -->
 
 
-
-
-
-
-  <div class="mt-5">
-    <!-- <div id="excel-btn">
-      <button>Get All Data</button>
-      <button>Export Excel</button>
-      <button>Import Excel</button>
-      <button>Show History</button>
-      <button>Delete File</button>
-    </div> -->
-
-    <!-- <div class="btn-groups mt-5">
-      <span><Button label="Get All Data" raised severity="info" icon="pi pi-check" size="small"/></span>
-      <span><Button label="Import Excel" @click="handleFileSelect()" raised severity="success" icon="pi pi-upload" size="small"/></span>
-      <span><Button label="Export Excel" raised severity="warning" icon="pi pi-file-export" size="small"/></span>
-      <span><Button label="Show History" plain text raised icon="pi pi-history" size="small"/></span>
-      <span><Button label="Delete File" raised severity="danger" icon="pi pi-trash" size="small"/></span>
-    </div> -->
-
-    <!-- Getting Excel File From the User-->
-    <!-- <div class="m-5">
-      <label for="formFile" class="form-label">Dosya Seçin</label>
-      <input class="form-control" type="file" id="formFile" accept=".xlsx, .xls" @change="handleFileSelect">
-    </div> -->
-
-    <!-- Show Columns of Selected Excel File -->
-    <!-- <div>
-      <h4>File Content</h4>
-
-      <div class="row mt-5 mb-5">
-        <div class="col-3">
-          <p>Columns</p>
-          <Listbox v-model="selectedCity" :options="columns" multiple filter optionLabel="name"
-            class="w-full md:w-14rem m-2" />
-        </div>
-
-        <div class="col-8">
-          Content
-        </div>
-      </div>
-
-
-    </div> -->
-
-
-    <!-- <div v-for="student in students" :key="student.id">
-      <router-link :to="{name:'studentInfo',params:{id:student.id}}">{{student.name}}</router-link>
-    </div> -->
-  </div>
-  <Footer/>
+  <Footer />
 </template>
 
 <script>
@@ -166,6 +139,7 @@ import * as XLSX from 'xlsx';
 import NavbarView from '../components/NavBar.vue'
 import Calendar from 'primevue/calendar';
 import Footer from '../components/Footer.vue'
+
 try {
   if (this.excelData.length === 0) {
     const storedData = localStorage.getItem('excelData');
@@ -264,15 +238,14 @@ export default {
       console.log(this.date);
 
       const fullDate = this.date.toString();
-      const year  = fullDate.substr(0,4);
-      const month = fullDate.substr(5,2);
-      const day   = fullDate.substr(8,2)
+      const year = fullDate.substr(0, 4);
+      const month = fullDate.substr(5, 2);
       //const year  = this.date.getFullYear()
-      console.log(day + '-' + month + '-' + year);
+      console.log(month + '-' + year);
 
       const excel_request_data = {
         "token": this.token,
-        "date":  day + '-' + month + '-' + year
+        "date": month + '-' + year
       };
 
       fetch(this.apiUrl + 'excel/getfile', {
@@ -350,6 +323,7 @@ export default {
 import { ref } from "vue";
 import { inject } from 'vue';
 import { useToast } from "primevue/usetoast";
+
 
 var excelData = ref()
 

@@ -1,5 +1,7 @@
 
 <template>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
     <div class="card relative z-2">
         <Menubar :model="items">
             <template #start>
@@ -7,7 +9,7 @@
             </template>
             <template #end>
                 <!-- <InputText placeholder="Search" type="text" /> -->
-                <router-link :to="{name:'login'}" class="m-5" style="text-decoration: none;">Çıkış</router-link>
+                <router-link :to="{name:'login'}" class="m-5 " style="text-decoration: none;">Çıkış</router-link>
             </template>
         </Menubar>
     </div>
@@ -17,19 +19,19 @@
 import { ref } from "vue";
 
 const items = ref([
-    {
-        label   : 'Anasayfa',
-        icon    : 'pi pi-fw pi-home',
-        to      : '/home'
+    //{
+        //label   : 'Anasayfa',
+        //icon    : 'pi pi-fw pi-home',
+        //to      : '/home'
 
-    },
+    //},
     // {
     //     label   : 'Dashboard',
     //     icon    : 'pi pi-align-center',
     //     to      : '/dashboard'
     // },
     {
-        label   : 'Excel',
+        label   : 'Gib İşlemleri',
         icon    : 'pi pi-file',
         to      : 'excel',
         items: [
@@ -47,6 +49,10 @@ const items = ref([
         label   : 'Verileri Al',
         icon    : 'pi pi-check'
     },
+    {
+        label   : 'Bayi İşlemleri',
+        icon    : "bi bi-shop"
+    }
     //{
         //label   : 'Kayıtlı Verileri Getir',
         //icon    : 'pi pi-file-export'
