@@ -1,12 +1,3 @@
-<!-- //Bayi İşlemleri için Buton Altına devam eden butonlar -->
-<!-- //Token Ekleme Alanı Yatay Tablonun Üstüne-->
-<!-- //Tarih Gün Seçimi Kaldır -->
-<!-- Uzak Bilgisayar Docker Configure Ayarları -->
-<!-- Veritabanı Entity Ayarları -->
-<!-- Geçmiş Dönem Belgeler Log ve Kayıt edilsin ve Tekrar Gib Bağlanma ihtiyac Yok -->
-<!-- Filtre İşlemleri || Banka Ad || Toplam Değer Sıralama -->
-
-
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -93,21 +84,56 @@
     <div class="row mt-5 mx-5 m-4 order-1">
 
       <!-- İşlem Geçmişi -->
-      <div class="col-12 col-md-3 mb-4 bg-secondary rounded-4" style="height: 510px;">
+      <div class="col-12 col-md-3 mb-4 bg-secondary rounded-4 table-responsive" style="height: 510px;">
         <div class="card h-md-100 mt-2 rounded-5 ">
           <p class="mt-2">İşlem Geçmişi</p>
         </div>
-        <ul style="list-style-type: none;" class="mt-5 card mx-auto">
+        <!-- History -->
+        <ul style="list-style-type: none; max-height: 600px;" class="mt-4 card mx-auto">
           <li>
-            <span class="mx-5 bg-success">
-              <i class="pi pi-file-export"></i>
-            </span> İndirildi
+            <div class="row mb-1">
+              <div class="col-3 bg-success">Icon</div>
+              <div class="col-9 bg-warning">İcerik</div>
+            </div>
           </li>
           <li>
-            <span></span>Hatalı Token</li>
+            <div class="row mb-1">
+              <div class="col-3 bg-success">Icon</div>
+              <div class="col-9 bg-warning">İcerik</div>
+            </div>
+          </li>
+          <li>
+            <div class="row">
+              <div class="col-3 bg-success">Icon</div>
+              <div class="col-9 bg-warning">Dosya Veritabanından Çekildi</div>
+            </div>
+          </li>
+          <li>
+            <span></span>Hatalı Token
+          </li>
           <li><span></span>23/06 İndirildi</li>
           <li><span></span>Dosya Veritabanından Çekildi</li>
           <li><span></span>Veritabanına Kayıt Edildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>Veritabanına Kayıt Edildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>Veritabanına Kayıt Edildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+          <li><span></span>Veritabanına Kayıt Edildi</li>
+          <li><span></span>23/06 İndirildi</li>
+          <li><span></span>Dosya Veritabanından Çekildi</li>
+
+
+
         </ul>
       </div>
 
@@ -123,7 +149,7 @@
         </div>
         <div class="content-part rounded-3 table-responsive mt-md-2 mt-3 mb-3" style="height:450px;">
           <table class="table table-striped">
-           
+
           </table>
         </div>
         <div class="download-history-list">
@@ -145,7 +171,6 @@
 import * as XLSX from 'xlsx';
 import NavbarView from '../components/NavBar.vue'
 import Calendar from 'primevue/calendar';
-import Footer from '../components/Footer.vue'
 
 try {
   if (this.excelData.length === 0) {
@@ -166,6 +191,11 @@ export default {
   },
   data() {
     return {
+      students: [
+        // {id:1, name:'Varol', not:55},
+        // {id:2, name:'Ali', not:75},
+        // {id:3, name:'Mehmet', not:85},
+      ],
       localeSettings: {
         monthNames: [
           'Ocak',
@@ -238,74 +268,50 @@ export default {
     },
     getExcelFile() {
       if (this.token === undefined || this.token === '' || this.date === undefined) {
-        this.showError('Token veya Tarih Geçersiz');
+        this.showError('Token or Date Can Not Be Empty ');
         return 0;
       }
 
-      console.log(this.date);
-
-      const fullDate = this.date.toString();
-      const year = fullDate.substr(0, 4);
-      const month = fullDate.substr(5, 2);
-      //const year  = this.date.getFullYear()
-      console.log(month + '-' + year);
+      console.log("Date : " + this.date);
+      responseList = [];
 
       const excel_request_data = {
         "token": this.token,
-        "date": month + '-' + year
+        "date": this.date
       };
 
-      fetch(this.apiUrl + 'excel/getfile', {
-        method: 'POST',
+      // fetch(this.apiUrl + '/excel/getfile', {
+      fetch("http://localhost:8060/users", {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(excel_request_data)
+        // body: JSON.stringify(excel_request_data)
       })
-        .then(response => response.blob())
-        .then(blob => {
-          const fileReader = new FileReader();
+        .then(response => response.json())
+        .then(json => {
 
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
+          console.log(json)
+          count = 0
 
-          link.href = url;
-          link.download = month + '-' + year + '-gib.xlsx'; // Dosya adını istediğin şekilde değiştirebilirsin
-          link.click();
+          json.forEach(element => {
 
-          // Bellekten URL'yi temizle
+            responseList.add({
+              "id": count + 1,
+              "pos_banka_vkn": element.pos_bank_vkn,
+              "pos_banka_adi": element.pos_bank_name,
+              "toplam": element.sum
+            });
+
+            count++;
+
+            console.log("Id : " + element.id + " customerName : " + element.customerName + " customerPassword : " + element.customerPassword);
+          });
 
 
-          fileReader.onload = (e) => {
-            const arrayBuffer = e.target.result;
-            const data = new Uint8Array(arrayBuffer);
-            const workbook = XLSX.read(data, { type: 'array' });
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-            this.excelData = jsonData;
-
-            for (let index = 0; index < this.excelData.length; index++) {
-              const element = this.excelData[index][2];
-              //console.log(element);
-
-            }
-
-            console.log("Length : " + this.excelData.length);
-            localStorage.setItem('excelData', JSON.stringify(this.excelData));
-
-            this.showSuccess(month + "/" + year + '-gib.xlsx' + ' Dosyası İndirildi')
-
-          };
-          fileReader.readAsArrayBuffer(blob);
-          URL.revokeObjectURL(url);
-
+          // saving into localstorage if needed
+          // localStorage.setItem('excelData', JSON.stringify(this.excelData));
         })
-        .catch(error => {
-          console.error('Excel dosyasi indirme hatasi:', error);
-        });
-    },
-    addToSql() {
-
     }
   },
   mounted() {
@@ -313,6 +319,7 @@ export default {
       const storedData = localStorage.getItem('excelData');
       if (storedData) {
         this.excelData = JSON.parse(storedData);
+        console.log("mounted " + this.excelData);
       }
     } catch (error) {
       console.log("mounted error");
@@ -331,8 +338,12 @@ import { ref } from "vue";
 import { inject } from 'vue';
 import { useToast } from "primevue/usetoast";
 
-
+var eleman = ref()
 var excelData = ref()
+eleman = "deger"
+
+
+
 
 const date = ref();
 const token = ref();
@@ -348,19 +359,19 @@ const columns = ref([
 const toast = useToast();
 
 const showSuccess = (message) => {
-  toast.add({ severity: 'success', summary: 'Başarılı', detail: message, life: 3000 });
+  toast.add({ severity: 'success', summary: 'Success Message', detail: message, life: 3000 });
 };
 
 const showInfo = (message) => {
-  toast.add({ severity: 'info', summary: 'Bilgi', detail: message, life: 3000 });
+  toast.add({ severity: 'info', summary: 'Info Message', detail: message, life: 3000 });
 };
 
 const showWarn = (message) => {
-  toast.add({ severity: 'warn', summary: 'Uyarı', detail: message, life: 3000 });
+  toast.add({ severity: 'warn', summary: 'Warn Message', detail: message, life: 3000 });
 };
 
 const showError = (message) => {
-  toast.add({ severity: 'error', summary: 'Hata', detail: message, life: 3000 });
+  toast.add({ severity: 'error', summary: 'Error Message', detail: message, life: 3000 });
 };
 
 </script>
@@ -398,6 +409,8 @@ const showError = (message) => {
   font-weight: bold;
   color: red;
 }
+
+
 
 
 
